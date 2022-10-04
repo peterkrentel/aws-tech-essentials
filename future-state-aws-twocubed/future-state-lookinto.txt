@@ -1,0 +1,55 @@
+aws ec2 authorize-security-group-ingress \
+    --group-id sg-1234567890abcdef0 \
+    --protocol tcp \
+    --port 443 \
+    --cidr 203.0.113.0/24
+
+
+services
+
+pinpoint (SMS)
+
+mgmt/governance
+    app config
+    cloudtrail
+    cloudwatch
+    config
+    * control tower
+    ** systems manager
+    * trusted advisor
+
+security/compliance
+    audit manager
+    certificate manager
+    detective
+    iam
+    kms
+    secrets manager
+
+Currently in use:
+    iam ---- roles
+        ec2
+        rds
+        s3
+    sqs
+    sns
+    textract
+    route53
+    pinpoint (for Ally bots -- )
+    workspaces
+
+
+letsencrypt/certbot
+
+
+Steps for configuring AWS (SOC2 compliance) for Citations:
+1. Setup initial IAM groups/roles
+    1. gcm_application_default: 
+        1. s3 read object/write object
+        2. rds read data/write data
+        3. etc
+2. Setup VPC for internal applications (w/ private DNS)
+3. Provision EC2 instance (ansible)
+4. Deploy citations application to EC2
+5. Move citations credentials to KMS
+6. Launch application
